@@ -37,7 +37,7 @@ bosque_quemado = generar_bosque(10,False)
 
 def suceso_aleatorio(prob):
     rand = random.randint(0,100)
-    if rand <= prob*100:
+    if rand < prob*100:
         return True
     else:
         return False
@@ -107,10 +107,57 @@ def limpieza(bosque):
             
 limpieza(b_1)
             
-            
-            
+## 7
 
+b_3 = generar_bosque(100)
+
+def incendio_forestal(p, f, n_rep, bosque):
+    vivos_temporada = list()
+    for i in range(n_rep):
+        ## Primavera
+        brotes(bosque, p)
+        ## Rayos
+        rayos(bosque, f)
+        ## Propagación Incendio
+        propagacion(bosque)
+        ## Limpieza
+        limpieza(bosque)
+        ## Cantidad de arboles sobrevivientes
+        vivos_temporada.append(cuantos(bosque,1))
     
+    sum = 0
+    
+    for i in  vivos_temporada:
+        sum += i
+        
+    ##print('sobrevivieron en promedio %s árboles con una probabilidad de caída de rayos de %s y una probabilidad de crecimiento de %s'% (sum/n_rep, f, p))
+    return sum/n_rep
+
+
+incendio_forestal(0.3,0.02,50,b_3)
+
+
+## 8
+
+b_4 = generar_bosque(100)
+
+data = dict()
+
+data['p'] = list()
+data['prom'] = list()
+
+
+for i in range(10):
+    
+    data['p'].append(i/10)
+    
+    data['prom'].append(incendio_forestal(i/10,0.02,100,b_4))
+    
+
+
+import matplotlib.pyplot as plt
+
+plt.plot('p', 'prom', data=data, linestyle='-', marker='o')
 
 
 
