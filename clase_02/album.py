@@ -158,9 +158,24 @@ promedio_packs(100,669)
 #Optativos
 
 ##10
+def promedio_packsII(nRep, album_size, pack_size = 5):
+    list_reps = list()
+    for i in range(nRep):
+        list_reps.append(completar_albumIV(album_size, pack_size))
+    return list_reps
 
+import seaborn as sns
 
+sns.distplot(promedio_packsII(100,669))
 
+x = promedio_packsII(100,669)
+
+counter = 0
+
+for i in x:
+    if i <= 850: counter += 1
+else:
+    prob = counter/len(x)
 
 
 
